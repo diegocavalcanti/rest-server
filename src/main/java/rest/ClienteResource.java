@@ -32,11 +32,9 @@ public class ClienteResource {
 		try {
 			List<Cliente> listaClientes = clienteService.buscarTodosOsClientes();
 			GenericEntity<List<Cliente>> entitys = new GenericEntity<List<Cliente>>(listaClientes) {};
-			return Response.status(Response.Status.OK).entity(entitys)
-					.header("Access-Control-Allow-Origin", "*").build();
+			return RestUtil.addHeader( Response.status(Response.Status.OK).entity(entitys) ).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.NO_CONTENT).entity(e.getMessage())
-					.header("Access-Control-Allow-Origin", "*").build();
+			return RestUtil.addHeader( Response.status(Response.Status.NO_CONTENT).entity(e.getMessage()) ).build();
 		}
 		
 	}
@@ -52,14 +50,14 @@ public class ClienteResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response adicionarCliente(Cliente cliente) {
 		cliente = clienteService.adicionarCliente(cliente);
-		return Response.status(Response.Status.CREATED).entity(cliente.toString()).build();
+		return RestUtil.addHeader( Response.status(Response.Status.CREATED).entity(cliente.toString()) ).build();
 	}
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response atualizarCliente(Cliente cliente) {
 		cliente = clienteService.atualizarCliente(cliente);
-		return Response.status(Response.Status.OK).entity(cliente.toString()).build();
+		return RestUtil.addHeader( Response.status(Response.Status.OK).entity(cliente.toString()) ).build();
 
 	}
 
@@ -68,7 +66,7 @@ public class ClienteResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response excluirCliente(@PathParam("id") int id) {
 		clienteService.excluirCliente(id);
-		return Response.ok("<status>success</status>").build();
+		return RestUtil.addHeader( Response.ok("<status>success</status>") ).build();
 
 	}
 }

@@ -21,10 +21,10 @@ public class ClienteServices {
 		if (listaClientes == null) {
 			listaClientes = new HashMap<Integer, Cliente>();
 
-			listaClientes.put(1, new Cliente(1, "Diego", 36L, new Date(1981,2,4)) );
-			listaClientes.put(4, new Cliente(4, "Caroline", 31L, new Date(1984,9,17)) );
-			listaClientes.put(3, new Cliente(3, "Gabriela", 5L, new Date(2011,10,25)) );
-			listaClientes.put(2, new Cliente(2, "Rodrigo", 1L, new Date(2020,12,25)) );
+			listaClientes.put(1, new Cliente(1, "Diego", 36L, new Date(81,2,4)) );
+			listaClientes.put(4, new Cliente(4, "Caroline", 31L, new Date(84,9,17)) );
+			listaClientes.put(3, new Cliente(3, "Gabriela", 5L, new Date(11,10,25)) );
+			listaClientes.put(2, new Cliente(2, "Rodrigo", 1L, new Date(20,12,25)) );
 		}
 	}
 
