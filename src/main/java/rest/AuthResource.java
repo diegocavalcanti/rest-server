@@ -4,7 +4,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.HeaderParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,25 +13,25 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-@Path("auth")
+@Path("/auth")
 public class AuthResource {
 
-	@POST
+	
+
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response login(@QueryParam("username") String userName, @QueryParam("password") String password) {
+	public Response login(@QueryParam("username" ) String username, @QueryParam("password" ) String password) {
 		try {
+			System.out.println("Recebido ->> UserName:" + username + " password:" + password);
+	
 
-			System.out.println("Recebido ->> UserName:" + userName + " Password: " + password);
-			
-			if (userName == null && password == null)
-				throw new RuntimeException("Usuário ou Senha Não pode ser nulos!");
+			if (username == null || password == null)
+				return RestUtil.addHeader(Response.status(Response.Status.UNAUTHORIZED)).build();
 
-			if ("admin".equalsIgnoreCase(userName) && "admin".equalsIgnoreCase(password))
-				throw new RuntimeException("Usuário ou Senha Inválida!");
+			if (!"admin".equalsIgnoreCase(username) || !"admin".equalsIgnoreCase(password))
+				return RestUtil.addHeader(Response.status(Response.Status.UNAUTHORIZED)).build();
 
-
-			JsonObject json = Json.createObjectBuilder().add("data", "123").build();
+			JsonObject json = Json.createObjectBuilder().add("info", "autorizado").build();
 
 			return RestUtil.addHeader(Response.status(Status.OK).entity(json)).build();
 

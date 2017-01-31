@@ -19,7 +19,7 @@ import service.ClienteServices;
 
 
 
-@Path("clientes")
+@Path("/clientes")
 public class ClienteResource {
 
 
@@ -42,8 +42,13 @@ public class ClienteResource {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Cliente buscarClientePorId(@PathParam("id") int id) {
-		return clienteService.buscarCliente(id);
+	public Response buscarClientePorId(@PathParam("id") int id) {
+		System.out.println("Buscando Cliente"+ id);
+		Cliente cliente = clienteService.buscarCliente(id);
+		if (cliente == null){
+			return RestUtil.addHeader( Response.status(Response.Status.NOT_FOUND).entity(cliente) ).build();
+		}
+		return RestUtil.addHeader( Response.status(Response.Status.OK).entity(cliente) ).build();
 	}
 
 	@POST

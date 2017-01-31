@@ -6,6 +6,7 @@ public class RestUtil {
 	
 	public static ResponseBuilder addHeader(ResponseBuilder response){
 		response.header("Access-Control-Allow-Origin", "*");
+		response.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
 		response.header("Access-Control-Allow-Methods", "GET, POST, PUT");
 		response.header("Content-Type", "application/json;charset=utf-8");
 		return response;
